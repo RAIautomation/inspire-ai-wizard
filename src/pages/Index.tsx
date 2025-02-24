@@ -2,15 +2,14 @@
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Card } from "@/components/ui/card";
-import { CopyIcon, LogOutIcon, Wand2Icon, ClockIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { LogOutIcon } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { PromptInput } from "@/components/prompt/PromptInput";
+import { GeneratedPrompt } from "@/components/prompt/GeneratedPrompt";
+import { PromptHistory } from "@/components/prompt/PromptHistory";
 
 const Index = () => {
-  const [topic, setTopic] = useState("");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [promptHistory, setPromptHistory] = useState<any[]>([]);
@@ -42,7 +41,7 @@ const Index = () => {
     }
   };
 
-  const generatePrompt = async () => {
+  const generatePrompt = async (topic: string) => {
     if (!topic.trim()) {
       toast({
         title: "Please enter a topic",
@@ -54,7 +53,6 @@ const Index = () => {
 
     setIsLoading(true);
     try {
-      // Get the current user's ID
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("You must be logged in to generate prompts");
 
@@ -71,7 +69,6 @@ const Index = () => {
       
       setGeneratedPrompt(data.generatedPrompt);
 
-      // Store the prompt in the database with proper types
       const { error: insertError } = await supabase
         .from('prompts')
         .insert({
@@ -82,7 +79,6 @@ const Index = () => {
 
       if (insertError) throw insertError;
 
-      // Refresh the prompt history
       await fetchPromptHistory();
       
       toast({
@@ -161,105 +157,25 @@ const Index = () => {
           </Button>
         </div>
 
-        <Card className="p-6 backdrop-blur-sm bg-white/80 border border-gray-200">
-          <div className="space-y-4">
-            <Textarea
-              placeholder="Enter your topic or idea (e.g., 'Create a business plan for a coffee shop')"
-              value={topic}
-              onChange={(e) => setTopic(e.target.value)}
-              className="min-h-[100px] resize-none text-lg"
-            />
-            <Button
-              onClick={generatePrompt}
-              disabled={isLoading}
-              className="w-full bg-gradient-to-r from-violet-500 to-violet-600 hover:from-violet-600 hover:to-violet-700 text-white transition-all duration-300"
-            >
-              {isLoading ? (
-                <div className="flex items-center space-x-2">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                  <span>Generating...</span>
-                </div>
-              ) : (
-                <div className="flex items-center space-x-2">
-                  <Wand2Icon className="h-5 w-5" />
-                  <span>Generate Prompt</span>
-                </div>
-              )}
-            </Button>
-          </div>
-        </Card>
+        <PromptInput 
+          onGeneratePrompt={generatePrompt}
+          isLoading={isLoading}
+        />
 
-        {generatedPrompt && (
-          <Card className={cn(
-            "p-6 backdrop-blur-sm bg-white/80 border border-gray-200",
-            "animate-in fade-in-50 duration-500"
-          )}>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <h2 className="text-xl font-semibold text-gray-900">
-                  Generated Prompt
-                </h2>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => copyToClipboard(generatedPrompt)}
-                  className="hover:bg-gray-100"
-                >
-                  <CopyIcon className="h-4 w-4" />
-                </Button>
-              </div>
-              <div className="p-4 bg-gray-50 rounded-lg text-gray-800 whitespace-pre-wrap">
-                {generatedPrompt}
-              </div>
-            </div>
-          </Card>
-        )}
+        <GeneratedPrompt 
+          prompt={generatedPrompt}
+          onCopy={copyToClipboard}
+        />
 
-        {/* Prompt History Section */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <ClockIcon className="h-5 w-5 text-gray-600" />
-            <h2 className="text-xl font-semibold text-gray-900">Your Prompt History</h2>
-          </div>
-          
-          {isLoadingHistory ? (
-            <div className="text-center py-8">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-500 mx-auto"></div>
-            </div>
-          ) : promptHistory.length === 0 ? (
-            <Card className="p-6 text-center text-gray-500">
-              No prompts generated yet. Try generating your first prompt above!
-            </Card>
-          ) : (
-            <div className="space-y-4">
-              {promptHistory.map((prompt) => (
-                <Card key={prompt.id} className="p-4 hover:shadow-md transition-shadow">
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-start">
-                      <div className="space-y-1">
-                        <h3 className="font-medium text-gray-900">{prompt.topic}</h3>
-                        <p className="text-sm text-gray-500">{formatDate(prompt.created_at)}</p>
-                      </div>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => copyToClipboard(prompt.generated_prompt)}
-                        className="hover:bg-gray-100"
-                      >
-                        <CopyIcon className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <p className="text-gray-700 whitespace-pre-wrap">{prompt.generated_prompt}</p>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          )}
-        </div>
+        <PromptHistory 
+          prompts={promptHistory}
+          isLoading={isLoadingHistory}
+          onCopy={copyToClipboard}
+          formatDate={formatDate}
+        />
       </div>
     </div>
   );
 };
 
 export default Index;
-
