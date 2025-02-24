@@ -4,14 +4,17 @@ import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
-import { CopyIcon, Wand2Icon } from "lucide-react";
+import { CopyIcon, LogOutIcon, Wand2Icon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const [topic, setTopic] = useState("");
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const generatePrompt = async () => {
     if (!topic.trim()) {
@@ -68,16 +71,39 @@ const Index = () => {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      navigate("/auth");
+    } catch (error: any) {
+      toast({
+        title: "Error signing out",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-6 sm:p-12">
       <div className="max-w-3xl mx-auto space-y-8">
-        <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-            AI Prompt Generator
-          </h1>
-          <p className="text-lg text-gray-600">
-            Transform your ideas into powerful AI prompts
-          </p>
+        <div className="flex justify-between items-center">
+          <div className="text-center space-y-4">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+              AI Prompt Generator
+            </h1>
+            <p className="text-lg text-gray-600">
+              Transform your ideas into powerful AI prompts
+            </p>
+          </div>
+          <Button
+            onClick={handleLogout}
+            variant="outline"
+            className="flex items-center gap-2"
+          >
+            <LogOutIcon className="h-4 w-4" />
+            Sign Out
+          </Button>
         </div>
 
         <Card className="p-6 backdrop-blur-sm bg-white/80 border border-gray-200">
