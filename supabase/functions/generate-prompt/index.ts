@@ -30,15 +30,15 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4',
+        model: 'gpt-4o-mini',
         messages: [
           { 
             role: 'system', 
-            content: 'You are an expert at crafting perfect prompts for AI models. Generate detailed, well-structured prompts that will help users get the best possible responses.'
+            content: 'You are an Expert AI prompt engineer. You will generate an AI prompt based on the user input. Structure the prompt as instructed by the user or in the best practice manner.'
           },
           { 
             role: 'user', 
-            content: `Create a detailed and effective AI prompt based on this topic or idea: ${topic}. The prompt should be well-structured and designed to get the best possible response from an AI.`
+            content: `Create a detailed and effective AI prompt based on this topic or idea: ${topic}`
           }
         ],
       }),

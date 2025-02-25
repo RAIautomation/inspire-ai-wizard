@@ -51,6 +51,15 @@ const Index = () => {
       return;
     }
 
+    if (isLoading) {
+      toast({
+        title: "Please wait",
+        description: "A prompt is already being generated",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsLoading(true);
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -133,7 +142,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-6 sm:p-12">
-      <div className="max-w-3xl mx-auto space-y-8">
+      <div className="max-w-5xl mx-auto space-y-8">
         <div className="flex justify-between items-center">
           <div className="text-center space-y-4">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">

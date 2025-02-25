@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { ClockIcon, CopyIcon } from "lucide-react";
 
 interface Prompt {
@@ -34,29 +35,35 @@ export const PromptHistory = ({ prompts, isLoading, onCopy, formatDate }: Prompt
           No prompts generated yet. Try generating your first prompt above!
         </Card>
       ) : (
-        <div className="space-y-4">
-          {prompts.map((prompt) => (
-            <Card key={prompt.id} className="p-4 hover:shadow-md transition-shadow">
-              <div className="space-y-3">
-                <div className="flex justify-between items-start">
-                  <div className="space-y-1">
-                    <h3 className="font-medium text-gray-900">{prompt.topic}</h3>
-                    <p className="text-sm text-gray-500">{formatDate(prompt.created_at)}</p>
+        <ScrollArea className="h-[500px] rounded-lg border bg-white/50 backdrop-blur-sm">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+            {prompts.map((prompt) => (
+              <Card key={prompt.id} className="flex flex-col hover:shadow-md transition-shadow">
+                <div className="p-4 space-y-3 flex-1">
+                  <div className="flex justify-between items-start">
+                    <div className="space-y-1 flex-1">
+                      <h3 className="font-medium text-gray-900">Topic</h3>
+                      <p className="text-sm text-gray-700">{prompt.topic}</p>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => onCopy(prompt.generated_prompt)}
+                      className="hover:bg-gray-100"
+                    >
+                      <CopyIcon className="h-4 w-4" />
+                    </Button>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => onCopy(prompt.generated_prompt)}
-                    className="hover:bg-gray-100"
-                  >
-                    <CopyIcon className="h-4 w-4" />
-                  </Button>
+                  <div className="space-y-1">
+                    <h3 className="font-medium text-gray-900">Generated Prompt</h3>
+                    <p className="text-sm text-gray-700 whitespace-pre-wrap">{prompt.generated_prompt}</p>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-2">{formatDate(prompt.created_at)}</p>
                 </div>
-                <p className="text-gray-700 whitespace-pre-wrap">{prompt.generated_prompt}</p>
-              </div>
-            </Card>
-          ))}
-        </div>
+              </Card>
+            ))}
+          </div>
+        </ScrollArea>
       )}
     </div>
   );
