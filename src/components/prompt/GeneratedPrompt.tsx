@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CopyIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import DOMPurify from "isomorphic-dompurify";
 
 interface GeneratedPromptProps {
   prompt: string;
@@ -11,6 +12,11 @@ interface GeneratedPromptProps {
 
 export const GeneratedPrompt = ({ prompt, onCopy }: GeneratedPromptProps) => {
   if (!prompt) return null;
+
+  // Sanitize HTML content
+  const sanitizedHTML = DOMPurify.sanitize(prompt, {
+    ALLOWED_TAGS: ["b", "i", "em", "strong", "p", "br", "ul", "ol", "li"],
+  });
 
   return (
     <Card className={cn(
@@ -31,9 +37,10 @@ export const GeneratedPrompt = ({ prompt, onCopy }: GeneratedPromptProps) => {
             <CopyIcon className="h-4 w-4" />
           </Button>
         </div>
-        <div className="p-4 bg-gray-50 rounded-lg text-gray-800 whitespace-pre-wrap">
-          {prompt}
-        </div>
+        <div 
+          className="p-4 bg-gray-50 rounded-lg text-gray-800 prose prose-sm max-w-none"
+          dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
+        />
       </div>
     </Card>
   );

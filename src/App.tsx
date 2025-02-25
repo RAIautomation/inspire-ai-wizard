@@ -9,6 +9,8 @@ import { RequireAuth } from "./components/RequireAuth";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import Pricing from "./pages/Pricing";
+import Billing from "./pages/Billing";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +22,7 @@ const App = () => (
       <BrowserRouter>
         <AuthProvider>
           <Routes>
+            <Route path="/auth" element={<Auth />} />
             <Route
               path="/"
               element={
@@ -28,7 +31,22 @@ const App = () => (
                 </RequireAuth>
               }
             />
-            <Route path="/auth" element={<Auth />} />
+            <Route
+              path="/pricing"
+              element={
+                <RequireAuth>
+                  <Pricing />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/billing"
+              element={
+                <RequireAuth>
+                  <Billing />
+                </RequireAuth>
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
