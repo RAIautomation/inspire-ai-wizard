@@ -2,9 +2,9 @@
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
-import { LogOutIcon } from "lucide-react";
+import { LogOutIcon, CreditCard } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { PromptInput } from "@/components/prompt/PromptInput";
 import { GeneratedPrompt } from "@/components/prompt/GeneratedPrompt";
 import { PromptHistory } from "@/components/prompt/PromptHistory";
@@ -152,14 +152,24 @@ const Index = () => {
               Transform your ideas into powerful AI prompts
             </p>
           </div>
-          <Button
-            onClick={handleLogout}
-            variant="outline"
-            className="flex items-center gap-2"
-          >
-            <LogOutIcon className="h-4 w-4" />
-            Sign Out
-          </Button>
+          <div className="flex items-center gap-4">
+            <Button
+              variant="outline"
+              className="flex items-center gap-2"
+              onClick={() => navigate('/pricing')}
+            >
+              <CreditCard className="h-4 w-4" />
+              Upgrade Plan
+            </Button>
+            <Button
+              onClick={handleLogout}
+              variant="outline"
+              className="flex items-center gap-2"
+            >
+              <LogOutIcon className="h-4 w-4" />
+              Sign Out
+            </Button>
+          </div>
         </div>
 
         <PromptInput 
@@ -184,3 +194,4 @@ const Index = () => {
 };
 
 export default Index;
+
