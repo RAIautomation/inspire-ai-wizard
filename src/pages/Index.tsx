@@ -56,16 +56,12 @@ const Index = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("You must be logged in to generate prompts");
 
-      const response = await fetch("https://lovable.dev/functions/v1/generate-prompt", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ topic }),
+      const { data, error } = await supabase.functions.invoke('generate-prompt', {
+        body: { topic },
       });
 
-      const data = await response.json();
-      if (data.error) throw new Error(data.error);
+      if (error) throw error;
+      if (!data.generatedPrompt) throw new Error("No prompt was generated");
       
       setGeneratedPrompt(data.generatedPrompt);
 

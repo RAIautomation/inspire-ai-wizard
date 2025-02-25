@@ -15,8 +15,14 @@ serve(async (req) => {
   }
 
   try {
+    console.log('Processing generate-prompt request');
     const { topic } = await req.json();
 
+    if (!topic) {
+      throw new Error('Topic is required');
+    }
+
+    console.log('Calling OpenAI API with topic:', topic);
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -24,7 +30,7 @@ serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
+        model: 'gpt-4',
         messages: [
           { 
             role: 'system', 
@@ -39,7 +45,14 @@ serve(async (req) => {
     });
 
     const data = await response.json();
+    console.log('OpenAI API response received');
+
+    if (data.error) {
+      throw new Error(data.error.message || 'Error from OpenAI API');
+    }
+
     const generatedPrompt = data.choices[0].message.content;
+    console.log('Successfully generated prompt');
 
     return new Response(JSON.stringify({ generatedPrompt }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
