@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
-import { LogOutIcon, CreditCard, Home, FileText, CreditCardIcon } from "lucide-react";
+import { LogOutIcon, CreditCard, Home, FileText, CreditCardIcon, Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { PromptInput } from "@/components/prompt/PromptInput";
@@ -142,15 +142,15 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-violet-50">
       {/* Navigation Bar */}
-      <nav className="bg-white border-b border-gray-200 fixed w-full z-10">
+      <nav className="bg-white/80 backdrop-blur-md border-b border-violet-100 fixed w-full z-10 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
-                <Link to="/" className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                  <Home className="h-6 w-6" />
+                <Link to="/" className="text-xl font-bold text-violet-900 flex items-center gap-2 hover:opacity-80 transition-opacity">
+                  <Sparkles className="h-6 w-6 text-violet-600" />
                   AI Prompt Generator
                 </Link>
               </div>
@@ -159,9 +159,9 @@ const Index = () => {
                   to="/"
                   className={`${
                     location.pathname === '/'
-                      ? 'border-primary text-gray-900'
-                      : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                      ? 'border-violet-600 text-violet-900'
+                      : 'border-transparent text-gray-500 hover:text-violet-700 hover:border-violet-300'
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors`}
                 >
                   <FileText className="h-4 w-4 mr-2" />
                   Prompts
@@ -170,9 +170,9 @@ const Index = () => {
                   to="/pricing"
                   className={`${
                     location.pathname === '/pricing'
-                      ? 'border-primary text-gray-900'
-                      : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                      ? 'border-violet-600 text-violet-900'
+                      : 'border-transparent text-gray-500 hover:text-violet-700 hover:border-violet-300'
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors`}
                 >
                   <CreditCardIcon className="h-4 w-4 mr-2" />
                   Pricing
@@ -182,7 +182,7 @@ const Index = () => {
             <div className="flex items-center gap-4">
               <Button
                 variant="outline"
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 bg-violet-50 hover:bg-violet-100 border-violet-200"
                 onClick={() => navigate('/pricing')}
               >
                 <CreditCard className="h-4 w-4" />
@@ -191,7 +191,7 @@ const Index = () => {
               <Button
                 onClick={handleLogout}
                 variant="outline"
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 hover:bg-red-50 hover:text-red-600 hover:border-red-200"
               >
                 <LogOutIcon className="h-4 w-4" />
                 Sign Out
@@ -203,32 +203,38 @@ const Index = () => {
 
       {/* Main Content */}
       <div className="pt-16 p-6 sm:p-12">
-        <div className="max-w-5xl mx-auto space-y-8">
-          <div className="text-center space-y-4">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+        <div className="max-w-5xl mx-auto space-y-12">
+          <div className="text-center space-y-4 animate-in fade-in-50">
+            <h1 className="text-4xl font-bold tracking-tight text-violet-900 sm:text-5xl lg:text-6xl">
               Transform Your Ideas
             </h1>
-            <p className="text-lg text-gray-600">
-              Generate powerful AI prompts tailored to your needs
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Generate powerful AI prompts tailored to your needs with our advanced prompt generation system
             </p>
           </div>
 
-          <PromptInput 
-            onGeneratePrompt={generatePrompt}
-            isLoading={isLoading}
-          />
+          <div className="animate-in fade-in-50 [--animation-delay:200ms]">
+            <PromptInput 
+              onGeneratePrompt={generatePrompt}
+              isLoading={isLoading}
+            />
+          </div>
 
-          <GeneratedPrompt 
-            prompt={generatedPrompt}
-            onCopy={copyToClipboard}
-          />
+          <div className="animate-in fade-in-50 [--animation-delay:400ms]">
+            <GeneratedPrompt 
+              prompt={generatedPrompt}
+              onCopy={copyToClipboard}
+            />
+          </div>
 
-          <PromptHistory 
-            prompts={promptHistory}
-            isLoading={isLoadingHistory}
-            onCopy={copyToClipboard}
-            formatDate={formatDate}
-          />
+          <div className="animate-in fade-in-50 [--animation-delay:600ms]">
+            <PromptHistory 
+              prompts={promptHistory}
+              isLoading={isLoadingHistory}
+              onCopy={copyToClipboard}
+              formatDate={formatDate}
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -236,3 +242,4 @@ const Index = () => {
 };
 
 export default Index;
+
