@@ -57,7 +57,14 @@ const Auth = () => {
           password,
         });
         if (error) throw error;
+        
+        // Explicitly navigate to the app page after successful sign-in
         navigate("/app");
+        
+        toast({
+          title: "Welcome back!",
+          description: "You have successfully signed in.",
+        });
       }
     } catch (error: any) {
       toast({
