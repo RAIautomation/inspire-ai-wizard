@@ -26,7 +26,7 @@ const BillingPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-6">
-      <div className="max-w-3xl mx-auto space-y-8 py-12">
+      <div className="max-w-3xl mx-auto space-y-8 py-4">
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900">
             Payment Information
