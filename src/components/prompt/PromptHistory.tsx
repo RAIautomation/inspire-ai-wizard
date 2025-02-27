@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ClockIcon, CopyIcon } from "lucide-react";
+import { ClockIcon, CopyIcon, TrashIcon } from "lucide-react";
 
 interface Prompt {
   id: string;
@@ -15,10 +15,11 @@ interface PromptHistoryProps {
   prompts: Prompt[];
   isLoading: boolean;
   onCopy: (text: string) => Promise<void>;
+  onDelete: (id: string) => Promise<void>;
   formatDate: (date: string) => string;
 }
 
-export const PromptHistory = ({ prompts, isLoading, onCopy, formatDate }: PromptHistoryProps) => {
+export const PromptHistory = ({ prompts, isLoading, onCopy, onDelete, formatDate }: PromptHistoryProps) => {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2">
@@ -45,14 +46,26 @@ export const PromptHistory = ({ prompts, isLoading, onCopy, formatDate }: Prompt
                       <h3 className="font-medium text-gray-900">Topic</h3>
                       <p className="text-sm text-gray-700">{prompt.topic}</p>
                     </div>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => onCopy(prompt.generated_prompt)}
-                      className="hover:bg-gray-100"
-                    >
-                      <CopyIcon className="h-4 w-4" />
-                    </Button>
+                    <div className="flex space-x-1">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => onCopy(prompt.generated_prompt)}
+                        className="hover:bg-gray-100"
+                        title="Copy prompt"
+                      >
+                        <CopyIcon className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => onDelete(prompt.id)}
+                        className="hover:bg-gray-100 hover:text-red-500"
+                        title="Delete prompt"
+                      >
+                        <TrashIcon className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
                   <div className="space-y-1">
                     <h3 className="font-medium text-gray-900">Generated Prompt</h3>

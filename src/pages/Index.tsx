@@ -100,6 +100,31 @@ const Index = () => {
     }
   };
 
+  const deletePrompt = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('prompts')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      // Update the local state to remove the deleted prompt
+      setPromptHistory(promptHistory.filter(prompt => prompt.id !== id));
+      
+      toast({
+        title: "Prompt deleted",
+        description: "Your prompt has been successfully deleted.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error deleting prompt",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+  };
+
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -164,6 +189,7 @@ const Index = () => {
                 prompts={promptHistory}
                 isLoading={isLoadingHistory}
                 onCopy={copyToClipboard}
+                onDelete={deletePrompt}
                 formatDate={formatDate}
               />
             </div>
