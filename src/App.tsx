@@ -29,6 +29,7 @@ const App = () => (
               {/* Public routes */}
               <Route path="/" element={<Landing />} />
               <Route path="/auth" element={<Auth />} />
+              <Route path="/pricing" element={<Pricing />} />
               
               {/* Protected routes */}
               <Route
@@ -36,14 +37,6 @@ const App = () => (
                 element={
                   <RequireAuth>
                     <Index />
-                  </RequireAuth>
-                }
-              />
-              <Route
-                path="/pricing"
-                element={
-                  <RequireAuth>
-                    <Pricing />
                   </RequireAuth>
                 }
               />
