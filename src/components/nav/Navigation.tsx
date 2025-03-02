@@ -70,6 +70,12 @@ export const Navigation = () => {
             ) : (
               <>
                 <Link
+                  to="/pricing"
+                  className="px-3 py-2 text-violet-900 hover:text-violet-700 font-medium"
+                >
+                  Pricing
+                </Link>
+                <Link
                   to="/auth"
                   className="px-3 py-2 text-violet-900 hover:text-violet-700 font-medium"
                 >
@@ -134,6 +140,13 @@ export const Navigation = () => {
               </>
             ) : (
               <>
+                <Link
+                  to="/pricing"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-violet-900 hover:bg-violet-100"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Pricing
+                </Link>
                 <Link
                   to="/auth"
                   className="block px-3 py-2 rounded-md text-base font-medium text-violet-900 hover:bg-violet-100"

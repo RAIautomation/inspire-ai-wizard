@@ -3,16 +3,90 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useAuth } from "@/components/AuthProvider";
+
+interface PricingPlan {
+  name: string;
+  price: string;
+  currency: string;
+  features: string[];
+  cta: string;
+  highlighted: boolean;
+}
 
 const PricingPage = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const [userCurrency, setUserCurrency] = useState("USD");
+  const [exchangeRates, setExchangeRates] = useState<Record<string, number>>({
+    USD: 1,
+    EUR: 0.92,
+    GBP: 0.79,
+    JPY: 152.54,
+    CAD: 1.37,
+    AUD: 1.53
+  });
+  const [isLoading, setIsLoading] = useState(true);
 
-  const plans = [
+  useEffect(() => {
+    const detectUserCurrency = async () => {
+      try {
+        // Try to get user's country from IP geolocation
+        const response = await fetch("https://ipapi.co/json/");
+        const data = await response.json();
+        
+        // Map country to common currencies
+        const countryCurrencyMap: Record<string, string> = {
+          US: "USD",
+          CA: "CAD",
+          GB: "GBP",
+          JP: "JPY",
+          AU: "AUD",
+          // EU countries
+          DE: "EUR", FR: "EUR", IT: "EUR", ES: "EUR", NL: "EUR",
+          BE: "EUR", AT: "EUR", IE: "EUR", FI: "EUR", PT: "EUR",
+          GR: "EUR", LU: "EUR", SK: "EUR", SI: "EUR", CY: "EUR",
+          EE: "EUR", LV: "EUR", LT: "EUR", MT: "EUR"
+        };
+        
+        const currency = countryCurrencyMap[data.country_code] || "USD";
+        setUserCurrency(currency);
+      } catch (error) {
+        // Fallback to USD if there's an error
+        console.error("Error detecting user currency:", error);
+        setUserCurrency("USD");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    detectUserCurrency();
+  }, []);
+
+  const formatPrice = (basePrice: number): string => {
+    const rate = exchangeRates[userCurrency] || 1;
+    const convertedPrice = (basePrice * rate).toFixed(2);
+    
+    const currencySymbols: Record<string, string> = {
+      USD: "$",
+      EUR: "€",
+      GBP: "£",
+      JPY: "¥",
+      CAD: "C$",
+      AUD: "A$"
+    };
+    
+    return `${currencySymbols[userCurrency] || "$"}${convertedPrice}`;
+  };
+
+  const getPricingPlans = (): PricingPlan[] => [
     {
       name: "Free",
-      price: "$0",
+      price: "0",
+      currency: userCurrency,
       features: [
-        "10 free prompts per month",
+        "5 free prompts per month",
         "Basic prompt templates",
         "Community support",
       ],
@@ -20,31 +94,67 @@ const PricingPage = () => {
       highlighted: false
     },
     {
-      name: "Pro",
-      price: "$9.99",
+      name: "Bronze",
+      price: formatPrice(5),
+      currency: userCurrency,
       features: [
-        "100 prompts per month",
+        "50 prompts per month",
         "Advanced prompt templates",
         "Priority support",
         "Custom prompt styles",
       ],
-      cta: "Upgrade to Pro",
+      cta: "Upgrade to Bronze",
       highlighted: true
     },
     {
-      name: "Enterprise",
-      price: "$29.99",
+      name: "Silver",
+      price: formatPrice(15),
+      currency: userCurrency,
       features: [
-        "Unlimited prompts",
-        "Custom AI models",
+        "150 prompts per month",
+        "Premium prompt templates",
         "24/7 Priority support",
         "API access",
         "Team collaboration",
       ],
-      cta: "Contact Sales",
+      cta: "Upgrade to Silver",
+      highlighted: false
+    },
+    {
+      name: "Gold",
+      price: formatPrice(35),
+      currency: userCurrency,
+      features: [
+        "Unlimited prompts",
+        "Custom AI models",
+        "Dedicated account manager",
+        "Advanced API access",
+        "Enterprise collaboration",
+        "Custom integrations"
+      ],
+      cta: "Upgrade to Gold",
       highlighted: false
     }
   ];
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-6 flex items-center justify-center">
+        <div className="animate-pulse flex space-x-4">
+          <div className="rounded-full bg-gray-300 h-12 w-12"></div>
+          <div className="flex-1 space-y-4 py-1">
+            <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+            <div className="space-y-2">
+              <div className="h-4 bg-gray-300 rounded"></div>
+              <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const plans = getPricingPlans();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-6">
@@ -54,12 +164,12 @@ const PricingPage = () => {
             Choose Your Plan
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Start with 10 free prompts! Upgrade anytime to unlock more features and
+            Start with 5 free prompts! Upgrade anytime to unlock more features and
             increased prompt generation capacity.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
           {plans.map((plan) => (
             <Card
               key={plan.name}
