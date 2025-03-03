@@ -50,6 +50,7 @@ export const Navigation = () => {
                 <Link
                   to="/app"
                   className="px-3 py-2 text-violet-900 hover:text-violet-700 font-medium"
+                  onClick={() => navigate("/app")}
                 >
                   Prompts
                 </Link>
@@ -116,7 +117,10 @@ export const Navigation = () => {
                 <Link
                   to="/app"
                   className="block px-3 py-2 rounded-md text-base font-medium text-violet-900 hover:bg-violet-100"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    navigate("/app");
+                  }}
                 >
                   Prompts
                 </Link>

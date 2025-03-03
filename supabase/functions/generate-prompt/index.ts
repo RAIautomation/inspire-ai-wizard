@@ -34,7 +34,7 @@ serve(async (req) => {
         messages: [
           { 
             role: 'system', 
-            content: 'You are an Expert AI prompt engineer. You will generate an AI prompt based on the user input. Structure the prompt as instructed by the user or in the best practice manner.'
+            content: 'You are an Expert AI prompt engineer. You will generate an AI prompt based on the user input. Structure the prompt with proper paragraphs and numbering where appropriate. Do not use markdown formatting characters like * or # in your response. Make sure the text is well-formatted with clear paragraphs and proper numbering for any lists.'
           },
           { 
             role: 'user', 
