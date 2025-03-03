@@ -22,6 +22,7 @@ const Index = () => {
 
   const fetchPromptHistory = async () => {
     try {
+      // Fetch all prompts without filtering by user_id
       const { data, error } = await supabase
         .from('prompts')
         .select('*')
@@ -162,7 +163,7 @@ const Index = () => {
         <div className="p-6 sm:p-12">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="text-center space-y-4 animate-in fade-in-50">
-              <h2 className="text-3xl font-bold tracking-tight text-violet-900 sm:text-4xl">
+              <h2 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-violet-700 to-purple-600 bg-clip-text text-transparent sm:text-4xl">
                 Generate Your Prompt
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">

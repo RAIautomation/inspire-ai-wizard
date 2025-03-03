@@ -30,14 +30,18 @@ export const Navigation = () => {
     }
   };
 
+  const navigateToPrompts = () => {
+    navigate("/app");
+  };
+
   return (
-    <header className="fixed w-full bg-white/80 backdrop-blur-md shadow-sm z-50">
+    <header className="fixed w-full bg-white/90 backdrop-blur-md border-b border-violet-100 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <Sparkles className="h-8 w-8 text-violet-600" />
-              <span className="ml-2 text-xl font-bold text-violet-900">
+              <span className="ml-2 text-xl font-bold bg-gradient-to-r from-violet-700 to-purple-600 bg-clip-text text-transparent">
                 PromptWiz
               </span>
             </Link>
@@ -47,23 +51,23 @@ export const Navigation = () => {
           <nav className="hidden md:flex items-center space-x-4">
             {user ? (
               <>
-                <Link
-                  to="/app"
-                  className="px-3 py-2 text-violet-900 hover:text-violet-700 font-medium"
-                  onClick={() => navigate("/app")}
+                <Button
+                  variant="ghost"
+                  onClick={navigateToPrompts}
+                  className="px-3 py-2 text-violet-900 hover:text-violet-700 hover:bg-violet-50 font-medium"
                 >
                   Prompts
-                </Link>
+                </Button>
                 <Link
                   to="/pricing"
-                  className="px-3 py-2 text-violet-900 hover:text-violet-700 font-medium"
+                  className="px-3 py-2 text-violet-900 hover:text-violet-700 hover:bg-violet-50 font-medium"
                 >
                   Pricing
                 </Link>
                 <Button
                   variant="outline"
                   onClick={handleLogout}
-                  className="ml-4"
+                  className="ml-4 border-violet-200 hover:bg-violet-50"
                 >
                   Sign Out
                 </Button>
@@ -72,19 +76,19 @@ export const Navigation = () => {
               <>
                 <Link
                   to="/pricing"
-                  className="px-3 py-2 text-violet-900 hover:text-violet-700 font-medium"
+                  className="px-3 py-2 text-violet-900 hover:text-violet-700 hover:bg-violet-50 font-medium"
                 >
                   Pricing
                 </Link>
                 <Link
                   to="/auth"
-                  className="px-3 py-2 text-violet-900 hover:text-violet-700 font-medium"
+                  className="px-3 py-2 text-violet-900 hover:text-violet-700 hover:bg-violet-50 font-medium"
                 >
                   Sign In
                 </Link>
                 <Button
                   onClick={() => navigate("/auth")}
-                  className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white"
+                  className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white shadow-md hover:shadow-lg transition-all"
                 >
                   Get Started
                 </Button>
@@ -114,19 +118,19 @@ export const Navigation = () => {
           <div className="px-2 pt-2 pb-3 space-y-1">
             {user ? (
               <>
-                <Link
-                  to="/app"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-violet-900 hover:bg-violet-100"
+                <Button
+                  variant="ghost"
                   onClick={() => {
                     setIsMenuOpen(false);
-                    navigate("/app");
+                    navigateToPrompts();
                   }}
+                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-violet-900 hover:bg-violet-50"
                 >
                   Prompts
-                </Link>
+                </Button>
                 <Link
                   to="/pricing"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-violet-900 hover:bg-violet-100"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-violet-900 hover:bg-violet-50"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Pricing
@@ -137,7 +141,7 @@ export const Navigation = () => {
                     handleLogout();
                     setIsMenuOpen(false);
                   }}
-                  className="w-full justify-center mt-3"
+                  className="w-full justify-center mt-3 border-violet-200"
                 >
                   Sign Out
                 </Button>
@@ -146,14 +150,14 @@ export const Navigation = () => {
               <>
                 <Link
                   to="/pricing"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-violet-900 hover:bg-violet-100"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-violet-900 hover:bg-violet-50"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Pricing
                 </Link>
                 <Link
                   to="/auth"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-violet-900 hover:bg-violet-100"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-violet-900 hover:bg-violet-50"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Sign In
@@ -163,7 +167,7 @@ export const Navigation = () => {
                     navigate("/auth");
                     setIsMenuOpen(false);
                   }}
-                  className="w-full justify-center mt-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white"
+                  className="w-full justify-center mt-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white shadow-md"
                 >
                   Get Started
                 </Button>
