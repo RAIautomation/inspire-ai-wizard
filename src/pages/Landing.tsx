@@ -11,7 +11,7 @@ const Landing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-violet-50">
+    <div className="min-h-screen bg-gradient-to-br from-secondary/50 via-background to-secondary/30">
       <Hero onGetStarted={handleGetStarted} />
       <Features />
     </div>

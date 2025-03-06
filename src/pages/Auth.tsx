@@ -78,26 +78,26 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-violet-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-secondary/50 via-background to-secondary/30 flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
           <div className="flex justify-center">
-            <Sparkles className="h-12 w-12 text-violet-600" />
+            <Sparkles className="h-12 w-12 text-primary" />
           </div>
-          <h1 className="mt-4 text-3xl font-bold tracking-tight text-violet-900">
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground">
             AI Prompt Generator
           </h1>
-          <p className="mt-2 text-gray-600">
+          <p className="mt-2 text-muted-foreground">
             Unlock the power of AI-generated prompts
           </p>
         </div>
 
-        <Card className="p-6 space-y-6 backdrop-blur-sm bg-white/80 border-violet-100 shadow-xl shadow-violet-100/20">
+        <Card className="p-6 space-y-6 glass shadow-sm">
           <div className="text-center space-y-2">
-            <h2 className="text-2xl font-bold text-violet-900">
+            <h2 className="text-2xl font-bold text-foreground">
               {isSignUp ? "Create an Account" : "Welcome Back"}
             </h2>
-            <p className="text-gray-600">
+            <p className="text-muted-foreground">
               {isSignUp
                 ? "Sign up to start generating AI prompts"
                 : "Sign in to your account"}
@@ -106,7 +106,7 @@ const Auth = () => {
 
           <form onSubmit={handleAuth} className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="text-sm font-medium text-foreground">
                 Email
               </label>
               <Input
@@ -115,7 +115,7 @@ const Auth = () => {
                 placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full border-violet-200 focus:border-violet-300 focus:ring-violet-300"
+                className="w-full border-border/60 focus:border-primary/50 focus:ring-primary/30"
                 required
               />
             </div>
@@ -123,7 +123,7 @@ const Auth = () => {
             <div className="space-y-2">
               <label
                 htmlFor="password"
-                className="text-sm font-medium text-gray-700"
+                className="text-sm font-medium text-foreground"
               >
                 Password
               </label>
@@ -133,7 +133,7 @@ const Auth = () => {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full border-violet-200 focus:border-violet-300 focus:ring-violet-300"
+                className="w-full border-border/60 focus:border-primary/50 focus:ring-primary/30"
                 required
               />
             </div>
@@ -142,7 +142,7 @@ const Auth = () => {
               <div className="space-y-2">
                 <label
                   htmlFor="confirmPassword"
-                  className="text-sm font-medium text-gray-700"
+                  className="text-sm font-medium text-foreground"
                 >
                   Confirm Password
                 </label>
@@ -152,7 +152,7 @@ const Auth = () => {
                   placeholder="••••••••"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full border-violet-200 focus:border-violet-300 focus:ring-violet-300"
+                  className="w-full border-border/60 focus:border-primary/50 focus:ring-primary/30"
                   required
                 />
               </div>
@@ -160,7 +160,7 @@ const Auth = () => {
 
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-violet-600 to-violet-500 hover:from-violet-700 hover:to-violet-600 text-white shadow-lg shadow-violet-200 transition-all duration-200"
+              className="w-full bg-primary hover:bg-primary/90 text-white shadow-sm"
               disabled={isLoading}
             >
               {isLoading ? (
@@ -177,7 +177,7 @@ const Auth = () => {
           <div className="text-center">
             <Button
               variant="link"
-              className="text-violet-600 hover:text-violet-700"
+              className="text-primary hover:text-primary/80"
               onClick={() => {
                 setIsSignUp(!isSignUp);
                 setConfirmPassword("");

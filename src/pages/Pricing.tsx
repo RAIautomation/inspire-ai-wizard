@@ -139,14 +139,14 @@ const PricingPage = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-6 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-background to-secondary/30 p-6 flex items-center justify-center">
         <div className="animate-pulse flex space-x-4">
-          <div className="rounded-full bg-gray-300 h-12 w-12"></div>
+          <div className="rounded-full bg-muted h-12 w-12"></div>
           <div className="flex-1 space-y-4 py-1">
-            <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+            <div className="h-4 bg-muted rounded w-3/4"></div>
             <div className="space-y-2">
-              <div className="h-4 bg-gray-300 rounded"></div>
-              <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+              <div className="h-4 bg-muted rounded"></div>
+              <div className="h-4 bg-muted rounded w-5/6"></div>
             </div>
           </div>
         </div>
@@ -157,13 +157,13 @@ const PricingPage = () => {
   const plans = getPricingPlans();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-6">
+    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/30 p-6">
       <div className="max-w-7xl mx-auto space-y-8 py-4">
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+          <h1 className="text-4xl font-bold tracking-tight text-foreground">
             Choose Your Plan
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
             Start with 5 free prompts! Upgrade anytime to unlock more features and
             increased prompt generation capacity.
           </p>
@@ -175,31 +175,31 @@ const PricingPage = () => {
               key={plan.name}
               className={`p-6 space-y-6 relative overflow-hidden ${
                 plan.highlighted
-                  ? "ring-2 ring-purple-500 shadow-lg scale-105"
-                  : "bg-white/50 backdrop-blur-sm"
+                  ? "ring-2 ring-primary shadow-sm scale-105"
+                  : "glass"
               }`}
             >
               {plan.highlighted && (
-                <div className="absolute top-0 right-0 bg-purple-500 text-white px-4 py-1 rounded-bl-lg text-sm">
+                <div className="absolute top-0 right-0 bg-primary text-white px-4 py-1 rounded-bl-lg text-sm">
                   Most Popular
                 </div>
               )}
               <div className="space-y-2">
-                <h3 className="text-2xl font-bold text-gray-900">{plan.name}</h3>
-                <p className="text-4xl font-bold text-gray-900">{plan.price}</p>
-                <p className="text-gray-500">per month</p>
+                <h3 className="text-2xl font-bold text-foreground">{plan.name}</h3>
+                <p className="text-4xl font-bold text-foreground">{plan.price}</p>
+                <p className="text-muted-foreground">per month</p>
               </div>
               <ul className="space-y-4">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-2">
-                    <CheckIcon className="h-5 w-5 text-green-500" />
-                    <span className="text-gray-700">{feature}</span>
+                    <CheckIcon className="h-5 w-5 text-primary/80" />
+                    <span className="text-foreground/80">{feature}</span>
                   </li>
                 ))}
               </ul>
               <Button
                 className={`w-full ${
-                  plan.highlighted ? "bg-purple-500 hover:bg-purple-600" : ""
+                  plan.highlighted ? "bg-primary hover:bg-primary/90" : ""
                 }`}
                 onClick={() => navigate("/billing")}
               >

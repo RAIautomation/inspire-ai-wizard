@@ -18,7 +18,6 @@ const Index = () => {
 
   const fetchPromptHistory = async () => {
     try {
-      // Fetch all prompts without filtering by user_id
       const { data, error } = await supabase
         .from('prompts')
         .select('*')
@@ -106,7 +105,6 @@ const Index = () => {
 
       if (error) throw error;
 
-      // Update the local state to remove the deleted prompt
       setPromptHistory(promptHistory.filter(prompt => prompt.id !== id));
       
       toast({
@@ -149,14 +147,14 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-violet-50">
+    <div className="min-h-screen bg-gradient-to-br from-secondary/50 via-background to-secondary/30">
       <div className="p-6 sm:p-12">
         <div className="max-w-5xl mx-auto space-y-12">
           <div className="text-center space-y-4 animate-in fade-in-50">
-            <h2 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-violet-700 to-purple-600 bg-clip-text text-transparent sm:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-gradient sm:text-4xl">
               Generate Your Prompt
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
               Enter your topic below and let our AI create the perfect prompt for you
             </p>
           </div>

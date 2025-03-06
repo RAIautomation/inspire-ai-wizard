@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, Sparkles } from "lucide-react";
@@ -35,13 +36,13 @@ export const Navigation = () => {
   };
 
   return (
-    <header className="fixed w-full bg-white/90 backdrop-blur-md border-b border-violet-100 z-50">
+    <header className="fixed w-full bg-background/80 backdrop-blur-md border-b border-border z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <Sparkles className="h-8 w-8 text-violet-600" />
-              <span className="ml-2 text-xl font-bold bg-gradient-to-r from-violet-700 to-purple-600 bg-clip-text text-transparent">
+              <Sparkles className="h-8 w-8 text-primary" />
+              <span className="ml-2 text-xl font-bold text-gradient">
                 PromptWiz
               </span>
             </Link>
@@ -54,20 +55,20 @@ export const Navigation = () => {
                 <Button
                   variant="ghost"
                   onClick={navigateToPrompts}
-                  className="px-3 py-2 text-violet-900 hover:text-violet-700 hover:bg-violet-50 font-medium"
+                  className="px-3 py-2 text-foreground hover:text-primary hover:bg-primary/5 font-medium"
                 >
                   Prompts
                 </Button>
                 <Link
                   to="/pricing"
-                  className="px-3 py-2 text-violet-900 hover:text-violet-700 hover:bg-violet-50 font-medium"
+                  className="px-3 py-2 text-foreground hover:text-primary hover:bg-primary/5 font-medium"
                 >
                   Pricing
                 </Link>
                 <Button
                   variant="outline"
                   onClick={handleLogout}
-                  className="ml-4 border-violet-200 hover:bg-violet-50"
+                  className="ml-4 border-primary/20 hover:bg-primary/5"
                 >
                   Sign Out
                 </Button>
@@ -76,19 +77,19 @@ export const Navigation = () => {
               <>
                 <Link
                   to="/pricing"
-                  className="px-3 py-2 text-violet-900 hover:text-violet-700 hover:bg-violet-50 font-medium"
+                  className="px-3 py-2 text-foreground hover:text-primary hover:bg-primary/5 font-medium"
                 >
                   Pricing
                 </Link>
                 <Link
                   to="/auth"
-                  className="px-3 py-2 text-violet-900 hover:text-violet-700 hover:bg-violet-50 font-medium"
+                  className="px-3 py-2 text-foreground hover:text-primary hover:bg-primary/5 font-medium"
                 >
                   Sign In
                 </Link>
                 <Button
                   onClick={() => navigate("/auth")}
-                  className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white shadow-md hover:shadow-lg transition-all"
+                  className="bg-primary hover:bg-primary/90 text-white shadow-sm"
                 >
                   Get Started
                 </Button>
@@ -100,7 +101,7 @@ export const Navigation = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-violet-900 hover:text-violet-700 focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-primary hover:bg-primary/5 focus:outline-none"
             >
               {isMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -114,20 +115,20 @@ export const Navigation = () => {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white/95 shadow-lg rounded-b-lg">
+        <div className="md:hidden bg-background/95 shadow-lg rounded-b-lg">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {user ? (
               <>
                 <Button
                   variant="ghost"
                   onClick={navigateToPrompts}
-                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-violet-900 hover:bg-violet-50"
+                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-primary/5"
                 >
                   Prompts
                 </Button>
                 <Link
                   to="/pricing"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-violet-900 hover:bg-violet-50"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-primary/5"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Pricing
@@ -138,7 +139,7 @@ export const Navigation = () => {
                     handleLogout();
                     setIsMenuOpen(false);
                   }}
-                  className="w-full justify-center mt-3 border-violet-200"
+                  className="w-full justify-center mt-3 border-primary/20"
                 >
                   Sign Out
                 </Button>
@@ -147,14 +148,14 @@ export const Navigation = () => {
               <>
                 <Link
                   to="/pricing"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-violet-900 hover:bg-violet-50"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-primary/5"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Pricing
                 </Link>
                 <Link
                   to="/auth"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-violet-900 hover:bg-violet-50"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-primary/5"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Sign In
@@ -164,7 +165,7 @@ export const Navigation = () => {
                     navigate("/auth");
                     setIsMenuOpen(false);
                   }}
-                  className="w-full justify-center mt-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white shadow-md"
+                  className="w-full justify-center mt-3 bg-primary hover:bg-primary/90 text-white"
                 >
                   Get Started
                 </Button>

@@ -53,25 +53,25 @@ export const GeneratedPrompt = ({ prompt, onCopy }: GeneratedPromptProps) => {
 
   return (
     <Card className={cn(
-      "p-6 backdrop-blur-sm bg-white/90 border border-violet-100 shadow-sm",
+      "p-6 glass",
       "animate-in fade-in-50 duration-500"
     )}>
       <div className="space-y-4">
         <div className="flex justify-between items-center">
-          <h2 className="text-xl font-semibold bg-gradient-to-r from-violet-700 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-xl font-semibold text-gradient">
             Generated Prompt
           </h2>
           <Button
             variant="outline"
             size="icon"
             onClick={() => onCopy(prompt)}
-            className="hover:bg-violet-50 border-violet-200 text-violet-600"
+            className="hover:bg-primary/10 border-primary/20 text-primary/90"
           >
             <CopyIcon className="h-4 w-4" />
           </Button>
         </div>
         <div 
-          className="p-4 bg-violet-50/50 rounded-lg text-gray-800 prose prose-sm max-w-none border border-violet-100"
+          className="p-4 bg-muted/30 rounded-lg text-foreground/90 prose prose-sm max-w-none border border-border/40"
           dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
         />
       </div>
