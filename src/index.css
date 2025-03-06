@@ -5,48 +5,48 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 220 20% 20%;
+    --background: 220 25% 97%;
+    --foreground: 220 45% 15%;
     --card: 0 0% 100%;
-    --card-foreground: 220 20% 20%;
+    --card-foreground: 220 45% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 20%;
-    --primary: 220 35% 35%;
+    --popover-foreground: 220 45% 15%;
+    --primary: 221 83% 53%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 220 10% 90%;
-    --secondary-foreground: 220 35% 25%;
-    --muted: 220 10% 96%;
-    --muted-foreground: 220 10% 55%;
-    --accent: 220 10% 90%;
-    --accent-foreground: 220 35% 25%;
-    --destructive: 0 70% 50%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 45% 25%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 25% 40%;
+    --accent: 221 83% 53%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 220 20% 85%;
-    --input: 220 20% 85%;
-    --ring: 220 35% 35%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 221 83% 53%;
     --radius: 0.5rem;
   }
  
   .dark {
-    --background: 220 30% 10%;
+    --background: 220 25% 9%;
     --foreground: 0 0% 95%;
-    --card: 220 30% 10%;
+    --card: 220 25% 12%;
     --card-foreground: 0 0% 95%;
-    --popover: 220 30% 10%;
+    --popover: 220 25% 12%;
     --popover-foreground: 0 0% 95%;
-    --primary: 220 40% 50%;
+    --primary: 221 70% 55%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 220 30% 20%;
+    --secondary: 220 25% 16%;
     --secondary-foreground: 0 0% 95%;
-    --muted: 220 30% 20%;
-    --muted-foreground: 220 10% 70%;
-    --accent: 220 30% 20%;
+    --muted: 220 25% 16%;
+    --muted-foreground: 220 15% 65%;
+    --accent: 221 70% 55%;
     --accent-foreground: 0 0% 95%;
-    --destructive: 0 60% 40%;
+    --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 95%;
-    --border: 220 30% 20%;
-    --input: 220 30% 20%;
-    --ring: 220 40% 50%;
+    --border: 220 25% 18%;
+    --input: 220 25% 18%;
+    --ring: 221 70% 55%;
   }
 }
 
@@ -60,6 +60,7 @@
   }
 }
 
+/* Custom animations and effects */
 .animate-in {
   animation-delay: 0ms;
   animation-fill-mode: both;
@@ -72,7 +73,7 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -80,14 +81,50 @@
   }
 }
 
-.glass {
-  @apply bg-white/80 backdrop-blur-md border border-white/30 shadow-sm;
+/* Custom UI elements */
+.card-shadow {
+  @apply shadow-lg shadow-primary/5;
+}
+
+.glass-panel {
+  @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl;
 }
 
 .text-gradient {
-  @apply bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent;
 }
 
 .card-hover {
-  @apply transition-all duration-300 hover:shadow-md hover:border-primary/30;
+  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+}
+
+.input-field {
+  @apply border-0 bg-secondary/50 focus:ring-2 focus:ring-primary/20;
+}
+
+.button-highlight {
+  @apply bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-500 text-white shadow-md;
+}
+
+.section-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24;
+}
+
+.scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.scroll-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
 }

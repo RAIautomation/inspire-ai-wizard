@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -147,14 +148,14 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-secondary/50 via-background to-secondary/30">
-      <div className="p-6 sm:p-12">
-        <div className="max-w-5xl mx-auto space-y-12">
+    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/30">
+      <div className="section-container">
+        <div className="max-w-4xl mx-auto space-y-12">
           <div className="text-center space-y-4 animate-in fade-in-50">
-            <h2 className="text-3xl font-bold tracking-tight text-gradient sm:text-4xl">
-              Generate Your Prompt
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              <span className="text-gradient">Generate Your Perfect Prompt</span>
             </h2>
-            <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
+            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
               Enter your topic below and let our AI create the perfect prompt for you
             </p>
           </div>

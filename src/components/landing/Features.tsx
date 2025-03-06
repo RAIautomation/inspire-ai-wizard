@@ -1,42 +1,66 @@
 
-import { CircleCheckBig, HistoryIcon, Share2 } from "lucide-react";
+import { CircleCheckBig, HistoryIcon, Share2, Brain, Zap, ThumbsUp } from "lucide-react";
 
 export const Features = () => {
   return (
-    <div className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-secondary/30">
-      <div className="max-w-7xl mx-auto">
+    <div className="bg-white py-24">
+      <div className="section-container">
         <div className="text-center mb-16 animate-in fade-in-50 [--animation-delay:300ms]">
-          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
-            Why Choose Our Prompt Generator?
+          <h2 className="text-3xl font-bold text-foreground sm:text-4xl mb-4">
+            Features that Elevate Your AI Experience
           </h2>
-          <p className="mt-4 text-xl text-foreground/80 max-w-3xl mx-auto">
-            Our platform offers everything you need to create, manage, and share AI prompts.
+          <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
+            Our platform is designed to help you get the most out of AI through perfect prompt engineering.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-8 animate-in fade-in-50 [--animation-delay:400ms]">
-          <div className="flex flex-col items-center text-center p-8 rounded-lg glass shadow-sm transition-all duration-300 hover:translate-y-[-5px] card-hover">
-            <div className="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center mb-6">
-              <CircleCheckBig className="h-7 w-7 text-primary" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+          <div className="flex flex-col p-8 rounded-2xl card-shadow transition-all duration-300 card-hover bg-card">
+            <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+              <Brain className="h-6 w-6 text-primary" />
             </div>
-            <h3 className="text-xl font-semibold text-primary mb-3">Smart Generation</h3>
-            <p className="text-foreground/80">Advanced AI algorithms create optimized prompts tailored to your specific needs and requirements</p>
+            <h3 className="text-xl font-semibold mb-3 text-foreground">Intelligent Generation</h3>
+            <p className="text-foreground/70 leading-relaxed">Advanced algorithms craft perfectly structured prompts that produce consistent, high-quality results from any AI model</p>
           </div>
           
-          <div className="flex flex-col items-center text-center p-8 rounded-lg glass shadow-sm transition-all duration-300 hover:translate-y-[-5px] card-hover">
-            <div className="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center mb-6">
-              <HistoryIcon className="h-7 w-7 text-primary" />
+          <div className="flex flex-col p-8 rounded-2xl card-shadow transition-all duration-300 card-hover bg-card">
+            <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+              <Zap className="h-6 w-6 text-primary" />
             </div>
-            <h3 className="text-xl font-semibold text-primary mb-3">History Tracking</h3>
-            <p className="text-foreground/80">Keep track of all your generated prompts and reuse them anytime you need them</p>
+            <h3 className="text-xl font-semibold mb-3 text-foreground">Instant Results</h3>
+            <p className="text-foreground/70 leading-relaxed">Get perfectly crafted prompts in seconds, saving hours of manual refinement and experimentation</p>
           </div>
           
-          <div className="flex flex-col items-center text-center p-8 rounded-lg glass shadow-sm transition-all duration-300 hover:translate-y-[-5px] card-hover">
-            <div className="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center mb-6">
-              <Share2 className="h-7 w-7 text-primary" />
+          <div className="flex flex-col p-8 rounded-2xl card-shadow transition-all duration-300 card-hover bg-card">
+            <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+              <HistoryIcon className="h-6 w-6 text-primary" />
             </div>
-            <h3 className="text-xl font-semibold text-primary mb-3">Easy Sharing</h3>
-            <p className="text-foreground/80">Copy and share your prompts with one click for seamless collaboration</p>
+            <h3 className="text-xl font-semibold mb-3 text-foreground">Comprehensive History</h3>
+            <p className="text-foreground/70 leading-relaxed">Every prompt you generate is automatically saved and organized for easy reference and reuse</p>
+          </div>
+          
+          <div className="flex flex-col p-8 rounded-2xl card-shadow transition-all duration-300 card-hover bg-card">
+            <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+              <ThumbsUp className="h-6 w-6 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold mb-3 text-foreground">Optimized Results</h3>
+            <p className="text-foreground/70 leading-relaxed">Our prompts are designed to work across all major AI platforms, ensuring consistent quality no matter which model you use</p>
+          </div>
+          
+          <div className="flex flex-col p-8 rounded-2xl card-shadow transition-all duration-300 card-hover bg-card">
+            <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+              <CircleCheckBig className="h-6 w-6 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold mb-3 text-foreground">Context-Aware</h3>
+            <p className="text-foreground/70 leading-relaxed">Our system understands the nuances of different use cases and tailors prompts to your specific needs</p>
+          </div>
+          
+          <div className="flex flex-col p-8 rounded-2xl card-shadow transition-all duration-300 card-hover bg-card">
+            <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+              <Share2 className="h-6 w-6 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold mb-3 text-foreground">Easy Sharing</h3>
+            <p className="text-foreground/70 leading-relaxed">Copy and share your prompts with one click for seamless collaboration with your team</p>
           </div>
         </div>
       </div>

@@ -18,18 +18,18 @@ export const PromptInput = ({ onGeneratePrompt, isLoading }: PromptInputProps) =
   };
 
   return (
-    <Card className="p-6 glass">
+    <Card className="p-6 rounded-xl card-shadow">
       <div className="space-y-4">
         <Textarea
           placeholder="Enter your topic or idea (e.g., 'Create a business plan for a coffee shop')"
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
-          className="min-h-[100px] resize-none text-lg border-border/60 bg-background"
+          className="min-h-[100px] resize-none text-lg rounded-xl input-field"
         />
         <Button
           onClick={handleSubmit}
           disabled={isLoading}
-          className="w-full bg-primary hover:bg-primary/90 text-white transition-all duration-300"
+          className="w-full button-highlight rounded-xl py-6"
         >
           {isLoading ? (
             <div className="flex items-center space-x-2">
