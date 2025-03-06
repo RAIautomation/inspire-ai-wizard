@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, Sparkles } from "lucide-react";
@@ -32,6 +31,7 @@ export const Navigation = () => {
 
   const navigateToPrompts = () => {
     navigate("/app");
+    setIsMenuOpen(false);
   };
 
   return (
@@ -120,10 +120,7 @@ export const Navigation = () => {
               <>
                 <Button
                   variant="ghost"
-                  onClick={() => {
-                    setIsMenuOpen(false);
-                    navigateToPrompts();
-                  }}
+                  onClick={navigateToPrompts}
                   className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-violet-900 hover:bg-violet-50"
                 >
                   Prompts

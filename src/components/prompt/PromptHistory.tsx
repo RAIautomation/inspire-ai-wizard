@@ -36,7 +36,7 @@ export const PromptHistory = ({ prompts, isLoading, onCopy, onDelete, formatDate
           No prompts generated yet. Try generating your first prompt above!
         </Card>
       ) : (
-        <ScrollArea className="h-[500px] rounded-lg border border-violet-100 bg-white/80 backdrop-blur-sm">
+        <ScrollArea className="h-[400px] rounded-lg border border-violet-100 bg-white/80 backdrop-blur-sm">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
             {prompts.map((prompt) => (
               <Card 
