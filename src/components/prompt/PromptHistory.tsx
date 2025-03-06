@@ -72,7 +72,11 @@ export const PromptHistory = ({ prompts, isLoading, onCopy, onDelete, formatDate
                   </div>
                   <div className="space-y-1">
                     <h3 className="font-medium text-violet-900">Generated Prompt</h3>
-                    <p className="text-sm text-gray-700 whitespace-pre-wrap">{prompt.generated_prompt}</p>
+                    <ScrollArea className="h-[120px] w-full rounded border border-violet-100 bg-white">
+                      <div className="p-2">
+                        <p className="text-sm text-gray-700 whitespace-pre-wrap">{prompt.generated_prompt}</p>
+                      </div>
+                    </ScrollArea>
                   </div>
                   <p className="text-xs text-gray-500 mt-2">{formatDate(prompt.created_at)}</p>
                 </div>

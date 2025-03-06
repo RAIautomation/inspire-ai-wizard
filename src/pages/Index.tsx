@@ -1,12 +1,9 @@
-
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { PromptInput } from "@/components/prompt/PromptInput";
 import { GeneratedPrompt } from "@/components/prompt/GeneratedPrompt";
 import { PromptHistory } from "@/components/prompt/PromptHistory";
-import { Hero } from "@/components/landing/Hero";
-import { Features } from "@/components/landing/Features";
 
 const Index = () => {
   const [generatedPrompt, setGeneratedPrompt] = useState("");
@@ -14,7 +11,6 @@ const Index = () => {
   const [promptHistory, setPromptHistory] = useState<any[]>([]);
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
   const { toast } = useToast();
-  const [showPromptInterface, setShowPromptInterface] = useState(false);
 
   useEffect(() => {
     fetchPromptHistory();
@@ -154,49 +150,42 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-violet-50">
-      {!showPromptInterface ? (
-        <>
-          <Hero onGetStarted={() => setShowPromptInterface(true)} />
-          <Features />
-        </>
-      ) : (
-        <div className="p-6 sm:p-12">
-          <div className="max-w-5xl mx-auto space-y-12">
-            <div className="text-center space-y-4 animate-in fade-in-50">
-              <h2 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-violet-700 to-purple-600 bg-clip-text text-transparent sm:text-4xl">
-                Generate Your Prompt
-              </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Enter your topic below and let our AI create the perfect prompt for you
-              </p>
-            </div>
+      <div className="p-6 sm:p-12">
+        <div className="max-w-5xl mx-auto space-y-12">
+          <div className="text-center space-y-4 animate-in fade-in-50">
+            <h2 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-violet-700 to-purple-600 bg-clip-text text-transparent sm:text-4xl">
+              Generate Your Prompt
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Enter your topic below and let our AI create the perfect prompt for you
+            </p>
+          </div>
 
-            <div className="animate-in fade-in-50 [--animation-delay:200ms]">
-              <PromptInput 
-                onGeneratePrompt={generatePrompt}
-                isLoading={isLoading}
-              />
-            </div>
+          <div className="animate-in fade-in-50 [--animation-delay:200ms]">
+            <PromptInput 
+              onGeneratePrompt={generatePrompt}
+              isLoading={isLoading}
+            />
+          </div>
 
-            <div className="animate-in fade-in-50 [--animation-delay:400ms]">
-              <GeneratedPrompt 
-                prompt={generatedPrompt}
-                onCopy={copyToClipboard}
-              />
-            </div>
+          <div className="animate-in fade-in-50 [--animation-delay:400ms]">
+            <GeneratedPrompt 
+              prompt={generatedPrompt}
+              onCopy={copyToClipboard}
+            />
+          </div>
 
-            <div className="animate-in fade-in-50 [--animation-delay:600ms]">
-              <PromptHistory 
-                prompts={promptHistory}
-                isLoading={isLoadingHistory}
-                onCopy={copyToClipboard}
-                onDelete={deletePrompt}
-                formatDate={formatDate}
-              />
-            </div>
+          <div className="animate-in fade-in-50 [--animation-delay:600ms]">
+            <PromptHistory 
+              prompts={promptHistory}
+              isLoading={isLoadingHistory}
+              onCopy={copyToClipboard}
+              onDelete={deletePrompt}
+              formatDate={formatDate}
+            />
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
